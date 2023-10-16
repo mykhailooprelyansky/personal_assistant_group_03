@@ -11,12 +11,9 @@ class Name:
 
 
 class Phone:
-    def __init__(self, value=''):
+    def __init__(self):
         while True:
             self.values = []
-            # if value:
-            #     self.values = value
-            # else:
             self.value = input("Enter phones with code: +38 plus 10 numbers after:")
             try:
                 for number in self.value.split(' '):
@@ -31,6 +28,14 @@ class Phone:
 
     def __getitem__(self):
         return self.values
+
+
+class Address:
+    def __init__(self, value):
+        self.value = value
+
+    def __getitem__(self):
+        return self.value
 
 
 class Birthday:
@@ -59,7 +64,6 @@ class Email:
 
     def __init__(self, value=''):
         while True:
-
             if value:
                 self.value = value
             else:
@@ -77,29 +81,19 @@ class Email:
 
 
 class Record:
-    def __init__(self, name = "", phones='', birthday='', email=''):
+    def __init__(self, name="", phones='', address='', birthday='', email=''):
         self.name = name
         self.phones = phones
+        self.address = address
         self.birthday = birthday
         self.email = email
 
-    def days_to_birthday(self):
-        if self.birthday is not None:
-            current_day = date.today()
-            if self.birthday.month < current_day.month:
-                year_of_future_birthday = current_day.year + 1
-            else:
-                year_of_future_birthday = current_day.year
-            date_of_future_birthday = date(year=year_of_future_birthday, month=self.birthday.month, day=self.birthday.day)
-            days_count = date_of_future_birthday - current_day
-            return days_count.days
-        else:
-            return ""
+
 
 
     def __str__(self):
         return (f"Contact name: {self.name},\nphones: {self.phones},\n"
-                f"email: {self.email},\ndays to birthday: {self.days_to_birthday()}")
+                f"email: {self.email},\nbirthday: {self.birthday}")
 
 
 book = AddressBook()
@@ -107,10 +101,10 @@ book = AddressBook()
 def test():
     name = Name(input("Name: ")).value
     phones = Phone().value
+    address = Address(input("Enter address: ")).value
     birth = Birthday().value
     email = Email().value
-    record = Record(name, phones, birth, email)
-    print(record)
+    record = Record(name, phones, address, birth, email)
     return book.add(record)
 
 if __name__ == '__main__':
