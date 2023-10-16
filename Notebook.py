@@ -1,21 +1,5 @@
 from collections import UserDict
 
-class Field:
-    def __init__(self, value):
-        self.value = value
-
-    def __str__(self):
-        return str(self.value)
-
-#class Tag(Field):
-#    def __init__(self, value):
-#        self.value = value
-        #if not self.value.isdigit():
-        #    raise ValueError("Tag may be one long word without space")
-    
-    def __str__(self):
-        return f"{self.value}"
-
 class Note:
     def __init__(self, text):
         self.text = text
@@ -25,6 +9,8 @@ class Note:
         return f"This note: {self.text}, has tags: {'; '.join(p for p in self.tags)}"
 
     def add_tag(self, tag):
+        if not tag.isspace():
+            raise ValueError("Tag may be one long word without space")
         self.tags.append(tag)
 
 class Notes(UserDict):
@@ -37,7 +23,6 @@ class Notes(UserDict):
                    'tags': note.tags}
         self.data.append(note_info)
         print(f"Yours note has been added to NoteBook.")
-
 
     def find(self, tag):
         for notes in self.data:
@@ -63,21 +48,6 @@ note2.add_tag("weather")
 print(note2)
 notebook.add(note2)
 
-#
-    # Виведення всіх записів у книзі
-#    for name, record in book.data.items():
-    #    print(record)
 
-    # Знаходження та редагування телефону для John
 note_weather = notebook.find("weather")
 print(note_weather['text'])
-#    john.edit_phone("1234567890", "1112223333")
-
-#    print(john)  # Виведення: Contact name: John, phones: 1112223333; 5555555555
-
-    # Пошук конкретного телефону у записі John
-#    found_phone = john.find_phone("5555555555")
-#    print(f"{john.name}: {found_phone}")  # Виведення: 5555555555
-
-    # Видалення запису Jane
-#    book.delete("Jane")
