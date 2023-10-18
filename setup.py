@@ -10,6 +10,6 @@ setup(name = "Personal CLI assistant",
       include_package_data=True,
       description= "'Personal assistant' with a command line interface.",
       entry_points = {
-          'console_scripts': ['clean-folder = clean_folder.clean:main'] 
+          'console_scripts': ['start = personal_assistant_group_03.main:main'] 
       }         
 )
