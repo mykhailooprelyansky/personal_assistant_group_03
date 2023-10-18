@@ -1,0 +1,2 @@
+[console_scripts]
+start = personal_assistant_group_03.main:main
