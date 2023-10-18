@@ -1,6 +1,7 @@
 from datetime import date, datetime
 import re
 from Address_book import *
+from Notebook import *
 #from sorting import *
 
 
@@ -97,6 +98,7 @@ class Record:
 class Bot:
     def __init__(self):
         self.book = AddressBook()
+        self.notebook = Notes()
 
     def handle(self, action):
         if action == 'add':
@@ -131,11 +133,47 @@ class Bot:
             return self.book.load(file_name)
         elif action == 'birthdays':
             days = input("Enter the number of days until Birthday: ")
-            print(self.book.list_contacts_with_day_of_birthday(days))
+            self.book.list_contacts_with_day_of_birthday(days)
         elif action == 'view':
             print(self.book)
-        elif action == 'sort':
-            sorting = FileSorter()
+        elif action == 'sorting':
+            folder_path = input("Input path to folder where you want to sort files: ")
+            file_sorter = FileSorter(folder_path)
+            file_sorter.sort_files()
+        elif action == 'notes':
+            note_action = input('Which action for Notes(add, find, edit, delete, sort, save): ').strip()
+            if note_action == "add":
+                text = input("Enter Note text: ")
+                tags = input("Enter Note tags: ").split()
+                new_note = (Note(text))
+                new_note.add_tag(tags)
+                print(new_note)
+                self.notebook.add(new_note)
+            elif note_action == "find":
+                search_parameter = input("Search by tags(Y) or text(N): ")
+                search_parameter = True if search_parameter == "Y" else False
+                find_text = input("Enter Search pattern: ")
+                search_result = self.notebook.find(find_text, search_parameter)
+            elif note_action == "edit":
+                edit_text = input("Enter pattern for note: ")
+                edit_note = self.notebook.find(edit_text, False)[0]
+                self.notebook.edit_note(edit_note)
+            elif note_action == "delete":
+                edit_text = input("Enter pattern for note: ")
+                edit_note = self.notebook.find(edit_text, False)[0]
+                self.notebook.delete(edit_note)
+            elif note_action == "sort":
+                pass
+            elif note_action == "save":
+                file_name = input("File name: ")
+                return self.notebook.save(file_name)
+            elif note_action == "load":
+                file_name = input("File name: ")
+                return self.notebook.load(file_name)
+            else:
+                print("There is no such command for notes!")
+            if note_action in ['add', 'delete', 'edit']:
+                self.notebook.save("auto_save_notes")
         elif action == 'exit':
             pass
         else:
@@ -146,7 +184,8 @@ def main():
     command = ""
     bot = Bot()
     bot.book.load("auto_save")
-    commands_help = ['Add', 'Search', 'Edit', 'Load', 'Remove', 'Save', 'Birthdays', 'View', 'Notes', 'Sort', 'Exit']
+    bot.notebook.load("auto_save_notes")
+    commands_help = ['Add', 'Search', 'Edit', 'Load', 'Remove', 'Save', 'Birthdays', 'View', 'Notes (add, find, edit, delete, sort, save)', 'Sorting', 'Exit']
     while True:
         command = input("Enter your command or the command Help to see a list of commands: ").lower()
         if command == 'help':

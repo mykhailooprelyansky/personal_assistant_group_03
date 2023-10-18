@@ -13,8 +13,9 @@ class AddressBook(UserDict):
         list_contacts = []
         for value in self.data.values():
             if value.birthday:
-                if self.days_to_birthday(value.birthday) == days:
-                    list_contacts.append(value)
+                if int(self.days_to_birthday(value.birthday)) == int(days):
+                    list_contacts.append(value.name)
+                    print(f'{value.name}, Date of Birth: {value.birthday.strftime("%d/%m/%Y")}')
         return list_contacts
 
     def days_to_birthday(self, bday):
@@ -47,7 +48,6 @@ class AddressBook(UserDict):
                 if account == name:
                     if parameter == 'name':
                         value.name = Name(input("Name: ")).value.strip()
-                        #account = value.name
                     elif parameter == 'birthday':
                         value.birthday = Birthday().value
                     elif parameter == 'email':
@@ -72,12 +72,12 @@ class AddressBook(UserDict):
             self.data.pop(name)
 
     def search_by_match(self, match):
-        list_serched_contact = []
+        list_searched_contact = []
         list_str_cont = [str(it) for it in self.data.values()]
         for st in list_str_cont:
             if st.lower().find(match.lower()) != -1:
-                list_serched_contact.append(st)
-        return list_serched_contact
+                list_searched_contact.append(st)
+        return list_searched_contact
 
     def __getstate__(self):
         attributes = self.__dict__.copy()
