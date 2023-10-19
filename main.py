@@ -163,7 +163,7 @@ class Bot:
                 edit_note = self.notebook.find(edit_text, False)[0]
                 self.notebook.delete(edit_note)
             elif note_action == "sort":
-                pass
+                self.notebook.sort_notes()
             elif note_action == "save":
                 file_name = input("File name: ")
                 return self.notebook.save(file_name)

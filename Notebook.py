@@ -3,15 +3,18 @@ from tkinter import messagebox
 from tkinter import *
 import pickle
 import os
+from datetime import date, datetime
 
 
 class Note:
     def __init__(self, text):
         self.text = text
         self.tags = []
+        self.create_date = datetime.now()
 
     def __str__(self):
-        return f"This note: {self.text}, has tags: {'; '.join(p for p in self.tags)}"
+        return f"Note: {self.text}, has tags: {'; '.join(p for p in self.tags)}, " \
+               f"date of creation: {self.create_date.strftime('%Y-%m-%d %H:%M:%S')}"
 
     def add_tag(self, tags):
         for tag in tags:
@@ -28,10 +31,15 @@ class Notes(UserList):
 
     def __iter__(self):
         return iter(self.data)
-    
+
+    def pr_notes(self, lst_notes):
+        for note in lst_notes:
+            print(f"Note creation date: {note['create_date'].strftime('%d/%m/%Y %H:%M:%S')}, Text: {note['text']}, Tags: {note['tags']}")
+
     def add(self, note: Note):
         note_info = {'text': note.text,
-                   'tags': note.tags}
+                     'tags': note.tags,
+                     'create_date': note.create_date}
         self.data.append(note_info)
         print(f"Yours note has been added to NoteBook.")
 
@@ -42,22 +50,25 @@ class Notes(UserList):
                 if find_by_tag and key == "tags":
                     for tag in value:
                         if find_text in tag:
-                            print(notes)
                             result.append(notes)
                 else:
                     if key == "text" and find_text in value:
-                        print(notes)
                         result.append(notes)
-        if not result:
+        if result:
+            sorted_list = sorted(result, key=lambda x: x['create_date'])
+            self.pr_notes(sorted_list)
+            #self.pr_notes(result)
+        else:
             print("No such notes found")
         return result
 
     def delete(self, note):
         if note in self.data:
-            self.data.remove(note)        
-    
-    def sort(self):
-        pass  
+            self.data.remove(note)
+
+    def sort_notes(self):
+        sorted_list = sorted(self.data, key=lambda x: x['create_date'])
+        self.pr_notes(sorted_list)
 
     def save(self, file_name):
         with open(file_name + '.bin', 'wb') as file:
@@ -86,11 +97,11 @@ class Notes(UserList):
 
         def save_text():
             note['text'] = text.get('1.0', END)
-        
+
         def edit_tags():
             text.delete('1.0', END)
             text.insert('1.0', '\n'.join(p for p in note['tags']))
-            
+
         def save_tags():
             edit_tags = text.get('1.0', END)
             edit_tags = edit_tags.split("\n")
@@ -102,7 +113,7 @@ class Notes(UserList):
                         messagebox.showerror(None, f'Tag "{tag}" consist space')
                         flag_ok = False
                         break
-                
+
             if flag_ok:
                 note['tags'].extend(edit_tags)
 
@@ -115,10 +126,9 @@ class Notes(UserList):
         tag_menu.add_command(label="Save", command=save_tags)
         main_menu.add_cascade(label="Text", menu=text_menu)
         main_menu.add_cascade(label="Tags", menu=tag_menu)
- 
+
         root.config(menu=main_menu)
         root.mainloop()
-        
 
 # notebook = Notes()
 #
