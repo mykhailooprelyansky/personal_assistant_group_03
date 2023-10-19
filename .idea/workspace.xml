@@ -4,7 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7dee0769-9006-4ba3-87cf-5e4334a3f285" name="Changes" comment="add commit" />
+    <list default="true" id="7dee0769-9006-4ba3-87cf-5e4334a3f285" name="Changes" comment="add commit">
+      <change afterPath="$PROJECT_DIR$/normalize.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scan.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sorting.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/personal_assistant_group_03.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/personal_assistant_group_03.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -21,10 +28,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo">{
-  &quot;customColor&quot;: &quot;&quot;,
-  &quot;associatedIndex&quot;: -1
-}</component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 4
+}]]></component>
   <component name="ProjectId" id="2WicNwWM1eajc12UFzzCG6wGw4C" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -34,6 +40,7 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
     "last_opened_file_path": "C:/Users/mikeo/PycharmProjects/FinalProject",
     "settings.editor.selected.configurable": "project.propVCSSupport.Mappings"
   }
