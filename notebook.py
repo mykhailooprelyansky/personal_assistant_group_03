@@ -1,9 +1,9 @@
-from collections import UserDict, UserList
+from collections import UserList
 from tkinter import messagebox
 from tkinter import *
 import pickle
 import os
-from datetime import date, datetime
+from datetime import datetime
 
 
 class Note:
@@ -33,8 +33,12 @@ class Notes(UserList):
         return iter(self.data)
 
     def pr_notes(self, lst_notes):
-        for note in lst_notes:
-            print(f"Note creation date: {note['create_date'].strftime('%d/%m/%Y %H:%M:%S')}, Text: {note['text']}, Tags: {note['tags']}")
+        if lst_notes:
+            for note in lst_notes:
+                print(f"Note creation date: {note['create_date'].strftime('%d/%m/%Y %H:%M:%S')}, Text: {note['text']},"
+                      f" Tags: {note['tags']}")
+        else:
+            print("List of notes is empty")
 
     def add(self, note: Note):
         note_info = {'text': note.text,
@@ -52,18 +56,17 @@ class Notes(UserList):
                         if find_text in tag:
                             result.append(notes)
                 else:
-                    if key == "text" and find_text in value:
+                    if key == "text" and find_text in value and not find_by_tag:
                         result.append(notes)
         if result:
             sorted_list = sorted(result, key=lambda x: x['create_date'])
             self.pr_notes(sorted_list)
-            #self.pr_notes(result)
         else:
             print("No such notes found")
         return result
 
-    def delete(self, note):
-        if note in self.data:
+    def delete(self, notes):
+        for note in notes:
             self.data.remove(note)
 
     def sort_notes(self):
@@ -130,28 +133,4 @@ class Notes(UserList):
         root.config(menu=main_menu)
         root.mainloop()
 
-# notebook = Notes()
-#
-# note1 = Note("This is my first note in this notebook")
-#
-# note1.add_tag("1234567890")
-# note1.add_tag("77777")
-# note1.add_tag("gfg")
-# print(note1)
-# notebook.add(note1)
-#
-#
-# note2 = Note("This note is about weather")
-# note2.add_tag("weather")
-# note2.add_tag("autumn")
-# print(note2)
-# notebook.add(note2)
-#
-#
-# note_weather = notebook.find("weather")
-# print(f'note2: {note_weather["text"]}')
-#     # Видалення запису Jane
-# notebook.edit_note(note_weather)
-# print(f'note2: {note_weather["text"]}')
-# #notebook.delete(note_weather)
-# print(notebook)
+

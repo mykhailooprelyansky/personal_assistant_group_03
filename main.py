@@ -1,8 +1,8 @@
-from datetime import date, datetime
+# from datetime import date, datetime
 import re
 from address_book import *
 from notebook import *
-#from sorting import *
+from sorting import *
 
 
 class Name:
@@ -126,7 +126,7 @@ class Bot:
             self.book.delete()
         elif action == 'save':
             file_name = input("File name: ")
-            return self.book.save(file_name)
+            self.book.save(file_name)
         elif action == 'load':
             self.book.load()
         elif action == 'birthdays':
@@ -161,8 +161,11 @@ class Bot:
                 self.notebook.edit_note(edit_note)
             elif note_action == "delete":
                 edit_text = input("Enter pattern for note: ")
-                edit_note = self.notebook.find(edit_text, False)[0]
-                self.notebook.delete(edit_note)
+                edit_note = self.notebook.find(edit_text, False)
+                if edit_note:
+                    self.notebook.delete(edit_note)
+                else:
+                    pass
             elif note_action == "sort":
                 self.notebook.sort_notes()
             elif note_action == "save":
@@ -182,10 +185,7 @@ class Bot:
 
 
 def main():
-    command = ""
     bot = Bot()
-    # bot.book.load("auto_save")
-    # bot.notebook.load("auto_save_notes")
     commands_help = ['Add', 'Search', 'Edit', 'Load', 'Remove', 'Save', 'Birthdays', 'View', 'Notes', 'Sorting', 'Exit']
     while True:
         command = input("Enter your command or the command Help to see a list of commands: ").lower()
