@@ -42,8 +42,7 @@ class AddressBook(UserDict):
 
     def editing_contact(self, name, parameter):
         try:
-            # додати name.title() щоб можна було вводити імя з малої літери
-            if name not in self.data.keys():
+            if name.title() not in self.data.keys():
                 raise NameError
             for account, value in self.data.items():
                 if account == name:
@@ -67,16 +66,18 @@ class AddressBook(UserDict):
             return True
         return False
 
-    def delete(self, name):
-        # while True:
-        #     name = input("Enter name of contact:")
-        #     if name.title() in self.data:
-        #         self.data.pop(name)
-        #         break
-        #     else:
-        #         raise FileNotFoundError("Name not found, please enter correct name")
-        if name in self.data:
-            self.data.pop(name)
+    def delete(self):
+        while True:
+            name = input("Enter name of contact:").title()
+            try:
+                if name in self.data:
+                    self.data.pop(name)
+                    print("File was remove of successful")
+                    break
+                else:
+                    raise FileNotFoundError
+            except FileNotFoundError:
+                print("Name not found, please enter correct name")
 
     def search_by_match(self, match):
         list_searched_contact = []
@@ -104,17 +105,20 @@ class AddressBook(UserDict):
     def save(self, file_name):
         with open(file_name + '.bin', 'wb') as file:
             pickle.dump(self.data, file)
-            # print(f"File {file_name}, create of successful")
+            print(f"File {file_name}, create of successful")
 
-    def load(self, file_name):
-        emptyness = os.stat(file_name + '.bin')
-        if emptyness.st_size != 0:
-            with open(file_name + '.bin', 'rb') as file:
-                self.data = pickle.load(file)
-        else:
-            # raise FileNotFound ("File not found, try enter another file or check name entered file"
-            pass
-        return self.data
+    def load(self):
+        while True:
+            file_name = input("File name: ")
+            try:
+                os.stat(file_name + '.bin')
+                with open(file_name + '.bin', 'rb') as file:
+                    self.data = pickle.load(file)
+                    print("File is load successful")
+                    break
+            except FileNotFoundError:
+                print("File not found, try enter another file or check name entered file")
+
 
 
 

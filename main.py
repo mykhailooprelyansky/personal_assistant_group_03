@@ -123,19 +123,20 @@ class Bot:
             parameter = input('Which parameter to edit(name, phones, birthday, address, email): ').strip()
             return self.book.editing_contact(contact_name, parameter)
         elif action == 'remove':
-            contact_name = input('Contact name: ')
-            return self.book.delete(contact_name)
+            self.book.delete()
         elif action == 'save':
             file_name = input("File name: ")
             return self.book.save(file_name)
         elif action == 'load':
-            file_name = input("File name: ")
-            return self.book.load(file_name)
+            self.book.load()
         elif action == 'birthdays':
             days = input("Enter the number of days until Birthday: ")
             self.book.list_contacts_with_day_of_birthday(days)
         elif action == 'view':
-            print(self.book)
+            if self.book:
+                print(self.book)
+            else:
+                print("Address book is empty")
         elif action == 'sorting':
             folder_path = input("Input path to folder where you want to sort files: ")
             file_sorter = FileSorter(folder_path)
@@ -153,7 +154,7 @@ class Bot:
                 search_parameter = input("Search by tags(Y) or text(N): ")
                 search_parameter = True if search_parameter == "Y" else False
                 find_text = input("Enter Search pattern: ")
-                search_result = self.notebook.find(find_text, search_parameter)
+                self.notebook.find(find_text, search_parameter)
             elif note_action == "edit":
                 edit_text = input("Enter pattern for note: ")
                 edit_note = self.notebook.find(edit_text, False)[0]
@@ -183,8 +184,8 @@ class Bot:
 def main():
     command = ""
     bot = Bot()
-    bot.book.load("auto_save")
-    bot.notebook.load("auto_save_notes")
+    # bot.book.load("auto_save")
+    # bot.notebook.load("auto_save_notes")
     commands_help = ['Add', 'Search', 'Edit', 'Load', 'Remove', 'Save', 'Birthdays', 'View', 'Notes', 'Sorting', 'Exit']
     while True:
         command = input("Enter your command or the command Help to see a list of commands: ").lower()
@@ -192,7 +193,7 @@ def main():
             format_str = str('{:%s%d}' % ('^', 20))
             for command in commands_help:
                 print(format_str.format(command))
-            command = input().strip().lower()
+            command = input("Enter chose command").strip().lower()
             bot.handle(command)
             if command in ['add', 'remove', 'edit']:
                 bot.book.save("auto_save")
