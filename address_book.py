@@ -42,6 +42,7 @@ class AddressBook(UserDict):
 
     def editing_contact(self, name, parameter):
         try:
+            # додати name.title() щоб можна було вводити імя з малої літери
             if name not in self.data.keys():
                 raise NameError
             for account, value in self.data.items():
@@ -58,7 +59,6 @@ class AddressBook(UserDict):
                         value.phones = Phone().value
                     else:
                         raise ValueError
-
         except ValueError:
             print('Incorrect parameter! Please provide correct parameter')
         except NameError:
@@ -68,6 +68,13 @@ class AddressBook(UserDict):
         return False
 
     def delete(self, name):
+        # while True:
+        #     name = input("Enter name of contact:")
+        #     if name.title() in self.data:
+        #         self.data.pop(name)
+        #         break
+        #     else:
+        #         raise FileNotFoundError("Name not found, please enter correct name")
         if name in self.data:
             self.data.pop(name)
 
@@ -97,6 +104,7 @@ class AddressBook(UserDict):
     def save(self, file_name):
         with open(file_name + '.bin', 'wb') as file:
             pickle.dump(self.data, file)
+            # print(f"File {file_name}, create of successful")
 
     def load(self, file_name):
         emptyness = os.stat(file_name + '.bin')
@@ -104,6 +112,7 @@ class AddressBook(UserDict):
             with open(file_name + '.bin', 'rb') as file:
                 self.data = pickle.load(file)
         else:
+            # raise FileNotFound ("File not found, try enter another file or check name entered file"
             pass
         return self.data
 

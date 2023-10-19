@@ -111,7 +111,7 @@ class Bot:
             print(record)
             return self.book.add(record)
         elif action == 'search':
-            pattern = input('Enter Search pattern: ')
+            pattern = input('Enter Search keyword: ')
             result = self.book.search_by_match(pattern)
             if result:
                 for item in result:
@@ -185,7 +185,7 @@ def main():
     bot = Bot()
     bot.book.load("auto_save")
     bot.notebook.load("auto_save_notes")
-    commands_help = ['Add', 'Search', 'Edit', 'Load', 'Remove', 'Save', 'Birthdays', 'View', 'Notes (add, find, edit, delete, sort, save)', 'Sorting', 'Exit']
+    commands_help = ['Add', 'Search', 'Edit', 'Load', 'Remove', 'Save', 'Birthdays', 'View', 'Notes', 'Sorting', 'Exit']
     while True:
         command = input("Enter your command or the command Help to see a list of commands: ").lower()
         if command == 'help':
