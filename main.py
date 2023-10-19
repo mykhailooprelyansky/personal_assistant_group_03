@@ -1,7 +1,7 @@
 from datetime import date, datetime
 import re
-from Address_book import *
-from Notebook import *
+from address_book import *
+from notebook import *
 #from sorting import *
 
 
