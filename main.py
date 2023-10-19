@@ -202,7 +202,7 @@ def main():
             if command in ['add', 'remove', 'edit']:
                 bot.book.save("auto_save")
         if command == 'exit':
-            print("Good bay")
+            print("Good bye!")
             break
 
 
