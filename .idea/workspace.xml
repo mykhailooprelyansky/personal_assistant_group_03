@@ -6,8 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="7dee0769-9006-4ba3-87cf-5e4334a3f285" name="Changes" comment="add commit">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sorting.py" beforeDir="false" afterPath="$PROJECT_DIR$/sorting.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,7 +35,7 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "changes__in__main",
+    "git-widget-placeholder": "main",
     "last_opened_file_path": "C:/Users/mikeo/PycharmProjects/FinalProject",
     "settings.editor.selected.configurable": "project.propVCSSupport.Mappings"
   }
