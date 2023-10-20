@@ -1,3 +1,15 @@
+Metadata-Version: 2.1
+Name: personal-cli-assistant
+Version: 0.0.5
+Summary: 'Personal assistant' with a command line interface.
+Home-page: https://github.com/mykhailooprelyansky/personal_assistant_group_03.git
+Author: Group_03
+License: MIT
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: Microsoft :: Windows :: Windows 10
+Description-Content-Type: text/markdown
+
 # Comand Line Interface assistant
 
 ## What is this?
