@@ -97,7 +97,7 @@ class AddressBook(UserDict):
     def __str__(self):
         result = []
         for account, value in self.data.items():
-            #print(value)
+            print(value)
             result.append(
                 "_" * 30 + "\n" + f"Name: {value.name} \nPhones: {value.phones} \nBirthday: {value.birthday.strftime('%d/%m/%Y')} \nEmail: {value.email}\nAddress: {value.address}\n")
         return '\n'.join(result)
