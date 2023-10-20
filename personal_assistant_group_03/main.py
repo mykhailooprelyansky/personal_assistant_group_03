@@ -139,6 +139,7 @@ class Bot:
                 print("Address book is empty")
         elif action == 'sorting':
             folder_path = input("Input path to folder where you want to sort files: ")
+            print(folder_path)
             file_sorter = FileSorter(folder_path)
             file_sorter.sort_files()
         elif action == 'notes':
@@ -202,7 +203,7 @@ def main():
             if command in ['add', 'remove', 'edit']:
                 bot.book.save("auto_save")
         if command == 'exit':
-            print("Good bay")
+            print("Good bye!")
             break
 
 
