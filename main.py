@@ -193,7 +193,7 @@ def main():
             format_str = str('{:%s%d}' % ('^', 20))
             for command in commands_help:
                 print(format_str.format(command))
-            command = input("Enter chose command").strip().lower()
+            command = input("Enter chose command: ").strip().lower()
             bot.handle(command)
             if command in ['add', 'remove', 'edit']:
                 bot.book.save("auto_save")

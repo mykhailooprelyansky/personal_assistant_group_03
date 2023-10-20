@@ -156,11 +156,3 @@ class FileSorter:
 
         self.get_folder_objects()
 
-
-def start_script(path):
-    print(f'Start sorting in "{path}"')
-    file_sorter = FileSorter(path)
-    file_sorter.sort_files()
-
-
-
